@@ -1,49 +1,70 @@
+
 import streamlit as st
 import pandas as pd
 import datetime
 
-from entities.user_entity import User
+from entities.client_entity import Client
+from utils.utils import add_client, delete_last_user, update_user
+
+
+
+if 'first_time' not in st.session_state:
+    st.session_state.first_time = False
+
+    st.session_state.df_to_predict = pd.DataFrame(columns=['Fecha de ingreso', 'Facturación mensual', 'Internet', 'Fibra óptica'])
+    st.session_state.current_client = Client()
+
 
 def print_test():
 
-    st.write("This is a test function.")
+    st.write(f"This is a test function whit data: {st.session_state.current_client.days}")
 
 st.title("El cliente abadona?")
-
-data = pd.DataFrame(columns=['Fecha de ingreso', 'Facturación mensual', 'Internet', 'Fibra óptica'])
 
 columns = st.columns(4)
 
 date = columns[0].date_input( 'Fecha',
                       value=datetime.date.today(), 
-                      min_value=datetime.date(2019, 1, 1), 
-                      max_value=datetime.date.today(),
-                      on_change= print_test)
+                      min_value=datetime.date(2017, 1, 1), 
+                      max_value=datetime.date.today(), )
 
-is_month_to_month = columns[1].selectbox( 'X',
+is_month_to_month = columns[1].selectbox( 'Campo 1',
                       options=['Si', 'No', 'No lo sé'], 
+                      key='is_month_to_month',
                       index=0)
 
-internet = columns[2].selectbox( 'Y',
+internet = columns[2].selectbox( 'Campo 2',
                       options=['Si', 'No', 'No lo sé'], 
+                      key='internet',
                       index=0)
 
-is_optical_fiber = columns[3].selectbox( 'Z',
+is_optical_fiber = columns[3].selectbox( 'Campo 3',
                       options=['Si', 'No', 'No lo sé'], 
+                      key='optical_fiber',
                       index=0)
+
+update_user(st.session_state.current_client, date, is_month_to_month, internet, is_optical_fiber)
 
 
 container = st.container(border=True)
 
 with container:
     columns = st.columns(5, vertical_alignment='center')
-    columns[1].button('Eliminar', use_container_width=True)
-    columns[3].button('Añadir', use_container_width=True)
+    columns[1].button('Eliminar', 
+                      use_container_width=True,
+                      on_click=delete_last_user,
+                      args=(st.session_state.df_to_predict,))
+    
+    columns[3].button('Añadir', 
+                      use_container_width=True,
+                      on_click=add_client,
+                      args=(st.session_state.current_client, st.session_state.df_to_predict))
 
 
-st.table( pd.DataFrame(columns=['Fecha de ingreso', 'Facturación mensual', 'Internet', 'Fibra óptica']))
+st.table( st.session_state.df_to_predict )
 
 columns = st.columns(3, vertical_alignment='center')
+
 columns[1].button('Predecir abandonos', use_container_width=True)
 
-st.table( pd.DataFrame(columns=['Fecha de ingreso', 'Facturación mensual', 'Internet', 'Fibra óptica', 'Probabilidades de abandonar']))
+# st.table( pd.DataFrame(columns=['Fecha de ingreso', 'Facturación mensual', 'Internet', 'Fibra óptica', 'Probabilidades de abandonar']))
