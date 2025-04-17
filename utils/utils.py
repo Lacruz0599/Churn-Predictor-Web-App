@@ -5,7 +5,7 @@ import pandas as pd
 # from entities.client_entity import Client
 
 
-def add_client( client, df ):
+def add_client( client, df, clients_list ):
     """
     Adds a user to the dataframe.
     
@@ -16,6 +16,8 @@ def add_client( client, df ):
     - is_optical_fiber: If the user has optical fiber
     """
     df.loc[len(df)] = client.to_dict()
+    df.reset_index(drop=True, inplace=True)
+    clients_list.append(client)
 
 
 def update_user(user, date = None, is_month_to_month = None, internet = None, is_optical_fiber = None ):
@@ -40,8 +42,9 @@ def update_user(user, date = None, is_month_to_month = None, internet = None, is
     if is_optical_fiber:
         user.is_optical_fiber = is_optical_fiber
 
-def delete_last_user(df):
-    """
+
+def delete_last_user(df, list_clients):
+    """"
     Deletes the last user in the dataframe.
     
     Parameters:
@@ -50,6 +53,8 @@ def delete_last_user(df):
     if len(df) > 0:
         df.drop(df.index[-1], inplace=True)
         df.reset_index(drop=True, inplace=True)
+        list_clients.pop(-1)
+
 
 def calculate_days( date ):
     """
@@ -63,3 +68,4 @@ def calculate_days( date ):
     """
     today = datetime.date.today()
     return (today - date).days
+

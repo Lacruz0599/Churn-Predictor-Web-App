@@ -13,11 +13,13 @@ if 'first_time' not in st.session_state:
 
     st.session_state.df_to_predict = pd.DataFrame(columns=['Fecha de ingreso', 'Facturación mensual', 'Internet', 'Fibra óptica'])
     st.session_state.current_client = Client()
+    st.session_state.clients_list = []
 
 
 def print_test():
 
     st.write(f"This is a test function whit data: {st.session_state.current_client.days}")
+
 
 st.title("El cliente abadona?")
 
@@ -43,6 +45,7 @@ is_optical_fiber = columns[3].selectbox( 'Campo 3',
                       key='optical_fiber',
                       index=0)
 
+
 update_user(st.session_state.current_client, date, is_month_to_month, internet, is_optical_fiber)
 
 
@@ -53,18 +56,23 @@ with container:
     columns[1].button('Eliminar', 
                       use_container_width=True,
                       on_click=delete_last_user,
-                      args=(st.session_state.df_to_predict,))
+                      args=(st.session_state.df_to_predict,
+                            st.session_state.clients_list))
     
     columns[3].button('Añadir', 
                       use_container_width=True,
                       on_click=add_client,
-                      args=(st.session_state.current_client, st.session_state.df_to_predict))
+                      args=(st.session_state.current_client, 
+                            st.session_state.df_to_predict,
+                            st.session_state.clients_list))
 
 
 st.table( st.session_state.df_to_predict )
 
 columns = st.columns(3, vertical_alignment='center')
 
-columns[1].button('Predecir abandonos', use_container_width=True)
 
+columns[1].button('Predecir abandonos', 
+                  use_container_width=True,
+                  )
 # st.table( pd.DataFrame(columns=['Fecha de ingreso', 'Facturación mensual', 'Internet', 'Fibra óptica', 'Probabilidades de abandonar']))
