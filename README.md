@@ -58,6 +58,12 @@ API_URL = "http://127.0.0.1:8000/churn-api/v1/predict/list"  # Cambia esta URL s
 3. Se muestra la respuesta con la predicción (`Sí` / `No`) y la probabilidad asociada.
 
 
+## 🔗 Enlaces Relacionados
+
+-  **API del modelo**: [Repositorio de la API](https://github.com/Lacruz0599/churn-prediction-api)
+-  **Modelo de Ml usado en la api**: [Predicción De Abandono De Clientes Telecom](https://github.com/Lacruz0599/prediccion-de-abandono-de-clientes-Telecom)
+
+
 ## 📬 Contacto
 
 César Eduardo Cruz Cabrera  
