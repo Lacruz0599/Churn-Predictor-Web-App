@@ -12,9 +12,17 @@ class ApiChurnDataSource():
         Predict churn using the API.
         """
         response = requests.post(self.url, json=data)
-        if response.status_code == 200:
-            return response.json()
-        else:
+
+        if response.status_code != 200:
             raise Exception("Algo salió mal en la predicción de churn")
+        
+        data = response.json()
+
+        if 'predictions' not in data:
+            raise Exception("No se encontraron predicciones en la respuesta")
+        
+        return data['predictions']
+            
+
         
 

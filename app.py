@@ -4,6 +4,7 @@ import pandas as pd
 import datetime
 
 from entities.client_entity import Client
+from repository.api_churn_repository import ApiChurnRepository
 from utils.utils import add_client, delete_last_user, update_user
 
 
@@ -71,8 +72,13 @@ st.table( st.session_state.df_to_predict )
 
 columns = st.columns(3, vertical_alignment='center')
 
+repository = ApiChurnRepository()
 
 columns[1].button('Predecir abandonos', 
                   use_container_width=True,
-                  )
+                  on_click= repository.predict_churn,
+                  kwargs ={
+                      'list_clients': st.session_state.clients_list
+                  })
+
 # st.table( pd.DataFrame(columns=['Fecha de ingreso', 'Facturación mensual', 'Internet', 'Fibra óptica', 'Probabilidades de abandonar']))
