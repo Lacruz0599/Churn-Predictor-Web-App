@@ -1,6 +1,5 @@
 
 import datetime
-import pandas as pd
 
 # from entities.client_entity import Client
 

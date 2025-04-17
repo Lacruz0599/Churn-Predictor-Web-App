@@ -1,5 +1,7 @@
 
 import datetime
+from numpy import nan
+
 from utils.utils import calculate_days
 
 
@@ -27,3 +29,20 @@ class Client():
             'Internet': self.internet,
             'Fibra óptica': self.is_optical_fiber
         }
+    
+    def map_entity(self):
+        return {
+            'days': self.days,
+            'is_month_to_month': self.one_cero_nan(self.is_month_to_month),
+            'internet': self.one_cero_nan(self.internet),
+            'is_optical_fiber': self.one_cero_nan(self.is_optical_fiber),
+        }
+    
+    def one_cero_nan(self, value):
+        if value == 'Si':
+            return 1
+        elif value == 'No':
+            return 0
+        else:
+            return nan
+        
