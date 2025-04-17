@@ -22,13 +22,25 @@ class Client():
         self.probability = probability
         self.churn = churn
     
-    def to_dict(self):
+    def to_dict(self, include_prob_churn=False):
+
+        if include_prob_churn:
+            return {
+                'Fecha de ingreso': self.date,
+                'Facturación mensual': self.is_month_to_month,
+                'Internet': self.internet,
+                'Fibra óptica': self.is_optical_fiber,
+                'Probabilidad de abandono': self.probability,
+                'Abandono': self.churn
+            }
+        
         return {
             'Fecha de ingreso': self.date,
             'Facturación mensual': self.is_month_to_month,
             'Internet': self.internet,
             'Fibra óptica': self.is_optical_fiber
         }
+    
     
     def map_entity(self):
         return {

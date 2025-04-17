@@ -1,6 +1,8 @@
 
 import datetime
 
+import pandas as pd
+
 # from entities.client_entity import Client
 
 
@@ -68,3 +70,12 @@ def calculate_days( date ):
     today = datetime.date.today()
     return (today - date).days
 
+def df_predictions( list_clients ):
+    
+    main_df = pd.DataFrame()
+
+    for client in list_clients:
+        client_df = pd.DataFrame([client.to_dict(include_prob_churn=True)])
+        main_df = pd.concat([main_df, client_df], ignore_index=True )
+    
+    return main_df

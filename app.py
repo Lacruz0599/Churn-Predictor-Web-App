@@ -5,8 +5,7 @@ import datetime
 
 from entities.client_entity import Client
 from repository.api_churn_repository import ApiChurnRepository
-from utils.utils import add_client, delete_last_user, update_user
-
+from utils.utils import add_client, delete_last_user, df_predictions, update_user
 
 
 if 'first_time' not in st.session_state:
@@ -16,10 +15,7 @@ if 'first_time' not in st.session_state:
     st.session_state.current_client = Client()
     st.session_state.clients_list = []
 
-
-def print_test():
-
-    st.write(f"This is a test function whit data: {st.session_state.current_client.days}")
+    st.session_state.predictions_ready = False
 
 
 st.title("El cliente abadona?")
@@ -81,4 +77,5 @@ columns[1].button('Predecir abandonos',
                       'list_clients': st.session_state.clients_list
                   })
 
-# st.table( pd.DataFrame(columns=['Fecha de ingreso', 'Facturación mensual', 'Internet', 'Fibra óptica', 'Probabilidades de abandonar']))
+
+st.table( df_predictions(st.session_state.clients_list) )
