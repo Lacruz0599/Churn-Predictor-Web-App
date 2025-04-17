@@ -44,7 +44,7 @@ streamlit run app.py
 
 ## 📡 Requisitos
 
-- Tener corriendo la API de churn localmente o desplegada en la nube.
+- Tener corriendo la [API de churn](https://github.com/Lacruz0599/churn-prediction-api) localmente o desplegada en la nube.
 - Modificar la URL de conexión en el archivo `datasource/api_churn_datasource.py` si la API está desplegada remotamente.
 
 ```python
