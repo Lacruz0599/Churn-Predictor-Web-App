@@ -78,4 +78,4 @@ columns[1].button('Predecir abandonos',
                   })
 
 
-st.table( df_predictions(st.session_state.clients_list) )
+# st.table( df_predictions(st.session_state.clients_list) )

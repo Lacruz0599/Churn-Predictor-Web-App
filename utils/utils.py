@@ -70,6 +70,7 @@ def calculate_days( date ):
     today = datetime.date.today()
     return (today - date).days
 
+
 def df_predictions( list_clients ):
     
     main_df = pd.DataFrame()
