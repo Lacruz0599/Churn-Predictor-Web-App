@@ -21,7 +21,7 @@ def add_client( client, df, clients_list ):
     clients_list.append(client)
 
 
-def update_user(user, date = None, is_month_to_month = None, internet = None, is_optical_fiber = None ):
+def update_user(user, date = None, is_month_to_month = None, internet = None, is_optical_fiber = None, is_electronic_check = None):
 
     """
     Updates a user in the dataframe.
@@ -42,6 +42,8 @@ def update_user(user, date = None, is_month_to_month = None, internet = None, is
         user.internet = internet
     if is_optical_fiber:
         user.is_optical_fiber = is_optical_fiber
+    if is_electronic_check:
+        user.is_electronic_check = is_electronic_check
 
 
 def delete_last_user(df, list_clients):

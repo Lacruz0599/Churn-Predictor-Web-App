@@ -1,11 +1,12 @@
 
+from ast import main
 import streamlit as st
 import pandas as pd
 import datetime
 
 from entities.client_entity import Client
 from repository.api_churn_repository import ApiChurnRepository
-from utils.utils import add_client, delete_last_user, df_predictions, update_user
+from utils.utils import add_client, delete_last_user, update_user
 
 
 if 'first_time' not in st.session_state:
@@ -20,35 +21,55 @@ if 'first_time' not in st.session_state:
 
 st.title("El cliente abadona?")
 
-columns = st.columns(4)
+main_container = st.container( border=True)
 
-date = columns[0].date_input( 'Fecha',
-                      value=datetime.date.today(), 
-                      min_value=datetime.date(2017, 1, 1), 
-                      max_value=datetime.date.today(), )
+with main_container:
 
-is_month_to_month = columns[1].selectbox( 'Campo 1',
-                      options=['Si', 'No', 'No lo sé'], 
-                      key='is_month_to_month',
-                      index=0)
+    container_form_1 = st.container()
 
-internet = columns[2].selectbox( 'Campo 2',
-                      options=['Si', 'No', 'No lo sé'], 
-                      key='internet',
-                      index=0)
+    with container_form_1:
 
-is_optical_fiber = columns[3].selectbox( 'Campo 3',
-                      options=['Si', 'No', 'No lo sé'], 
-                      key='optical_fiber',
-                      index=0)
+        columns_form_1 = st.columns(3 , vertical_alignment='center')
+
+        date = columns_form_1[0].date_input( 'Fecha',
+                        value=datetime.date.today(), 
+                        min_value=datetime.date(2017, 1, 1), 
+                        max_value=datetime.date.today(), )
+
+        is_month_to_month = columns_form_1[1].selectbox( 'Campo 1',
+                            options=['Si', 'No', 'No lo sé'], 
+                            key='is_month_to_month',
+                            index=0)
+
+        internet = columns_form_1[2].selectbox( 'Campo 2',
+                            options=['Si', 'No', 'No lo sé'], 
+                            key='internet',
+                            index=0)
+
+
+    container_form_2 = st.container()
+
+    with container_form_2:
+
+        columns_form_2 = st.columns(3, vertical_alignment='center')
+        
+        is_optical_fiber = columns_form_2[0].selectbox( 'Campo 3',
+                            options=['Si', 'No', 'No lo sé'], 
+                            key='optical_fiber',
+                            index=0)
+
+        is_electronic_check = columns_form_2[2].selectbox( 'Campo 4',
+                            options=['Si', 'No', 'No lo sé'], 
+                            key='is_electronic_check',
+                            index=0)
 
 
 update_user(st.session_state.current_client, date, is_month_to_month, internet, is_optical_fiber)
 
 
-container = st.container(border=True)
+container_buttons = st.container(border=True)
 
-with container:
+with container_buttons:
     columns = st.columns(5, vertical_alignment='center')
     columns[1].button('Eliminar', 
                       use_container_width=True,
