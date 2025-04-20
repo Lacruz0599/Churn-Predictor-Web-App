@@ -1,6 +1,6 @@
 
 import datetime
-from numpy import nan
+# from numpy import nan
 
 from utils.utils import calculate_days
 
@@ -50,7 +50,7 @@ class Client():
         return {
             'days': self.days,
             'is_month_to_month': self.one_cero_nan(self.is_month_to_month),
-            'is_optical_fiber': self.one_cero_nan(self.is_optical_fiber),
+            'is_fiber_optic': self.one_cero_nan(self.is_optical_fiber),
             'is_electronic_check': self.one_cero_nan(self.is_electronic_check),
             'internet': self.one_cero_nan(self.internet)
         }
@@ -61,7 +61,7 @@ class Client():
         elif value == 'No':
             return 0
         else:
-            return nan
+            return None
         
 
 
