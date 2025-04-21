@@ -24,6 +24,7 @@ class Client():
         self.probability = probability
         self.churn = churn
     
+    
     def to_dict(self, include_prob_churn=False):
 
         if include_prob_churn:
@@ -34,7 +35,7 @@ class Client():
                 'Fibra óptica': self.is_optical_fiber,
                 'Cheque electrónico': self.is_electronic_check,
                 'Probabilidad de abandono': self.probability,
-                'Abandono': self.churn
+                'Abandono': 'No abandona' if self.churn == 0 else 'Abandona'
             }
         
         return {
@@ -55,6 +56,7 @@ class Client():
             'internet': self.one_cero_nan(self.internet)
         }
     
+
     def one_cero_nan(self, value):
         if value == 'Si':
             return 1

@@ -15,7 +15,7 @@ class ApiChurnDataSource():
 
         if response.status_code != 200:
             raise Exception("Algo salió mal en la predicción de churn")
-        
+        # todo: implementar el time out
         data = response.json()
 
         if 'predictions' not in data:

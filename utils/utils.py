@@ -6,7 +6,7 @@ import pandas as pd
 # from entities.client_entity import Client
 
 
-def add_client( client, df, clients_list ):
+def add_client_df( client, df, clients_list ):
     """
     Adds a user to the dataframe.
     
@@ -74,11 +74,35 @@ def calculate_days( date ):
 
 
 def df_predictions( list_clients ):
-    
-    main_df = pd.DataFrame()
+
+    dates = []
+    is_month_to_month = []
+    internet = []
+    is_optical_fiber = []
+    is_electronic_check = []
+    prob = []
+    churn = []  
 
     for client in list_clients:
-        client_df = pd.DataFrame([client.to_dict(include_prob_churn=True)])
-        main_df = pd.concat([main_df, client_df], ignore_index=True )
+        dates.append(client.date)
+        is_month_to_month.append(client.is_month_to_month)
+        internet.append(client.internet)
+        is_optical_fiber.append(client.is_optical_fiber)
+        is_electronic_check.append(client.is_electronic_check)
+        prob.append(client.probability)
+        churn.append(client.churn)
+
+
+    main_df = pd.DataFrame(
+        {
+            "Fecha": dates,
+            "Facturación mensual": is_month_to_month,
+            "internet": internet,
+            "Tiene fibra óptica": is_optical_fiber,
+            "Paga con cheque electronico": is_electronic_check,
+            "Probabilidad": prob,
+            "churn": churn
+        }
+    )
     
     return main_df
