@@ -4,7 +4,7 @@ import datetime
 
 from entities.client_entity import Client
 from repository.api_churn_repository import ApiChurnRepository
-from utils.utils import add_client_df, delete_last_user, df_predictions, update_user
+from utils.utils import add_client_df, delete_last_client, df_predictions, update_current_client
 
 
 @st.dialog('Resultados de las predicciones', width='large')
@@ -32,7 +32,7 @@ if 'first_time' not in st.session_state:
     st.session_state.predictions_ready = False
 
 
-st.title("¿El cliente abadonaá el servicio?")
+st.title("¿El cliente abandonará el servicio?")
 
 main_container = st.container( border=True)
 
@@ -77,16 +77,28 @@ with main_container:
                             index=0)
 
 
-update_user(st.session_state.current_client, date, is_month_to_month, internet, is_optical_fiber, is_electronic_check)
+update_current_client(st.session_state.current_client, date, is_month_to_month, internet, is_optical_fiber, is_electronic_check)
 
 
 container_buttons = st.container(border=True)
 
+repository = ApiChurnRepository()
+
 with container_buttons:
-    columns = st.columns(5, vertical_alignment='center')
-    columns[1].button('Eliminar', 
+    columns = st.columns(4, vertical_alignment='center')
+
+    columns[0].button('Predecir abandonos', 
+                  use_container_width=True,
+                  on_click= repository.predict_churn,
+                  kwargs ={
+                      'list_clients': st.session_state.clients_list,
+                      'show_results': show_results,
+                      'show_error': show_error,
+                  })
+    
+    columns[2].button('Eliminar', 
                       use_container_width=True,
-                      on_click=delete_last_user,
+                      on_click=delete_last_client,
                       args=(st.session_state.df_to_predict,
                             st.session_state.clients_list))
     
@@ -100,18 +112,6 @@ with container_buttons:
 
 st.table( st.session_state.df_to_predict )
 
-columns = st.columns(3, vertical_alignment='center')
-
-repository = ApiChurnRepository()
-
-columns[1].button('Predecir abandonos', 
-                  use_container_width=True,
-                  on_click= repository.predict_churn,
-                  kwargs ={
-                      'list_clients': st.session_state.clients_list,
-                      'show_results': show_results,
-                      'show_error': show_error,
-                  })
 
 
 

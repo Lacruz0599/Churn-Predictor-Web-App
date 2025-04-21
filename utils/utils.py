@@ -2,8 +2,7 @@
 import datetime
 
 import pandas as pd
-
-# from entities.client_entity import Client
+import streamlit as st
 
 
 def add_client_df( client, df, clients_list ):
@@ -16,12 +15,13 @@ def add_client_df( client, df, clients_list ):
     - internet: If the user has internet
     - is_optical_fiber: If the user has optical fiber
     """
-    df.loc[len(df)] = client.to_dict()
+    # df.loc[len(df)] = client.to_dict()
+    df.loc[len(df)] = st.session_state.current_client.to_dict()
     df.reset_index(drop=True, inplace=True)
     clients_list.append(client)
 
 
-def update_user(user, date = None, is_month_to_month = None, internet = None, is_optical_fiber = None, is_electronic_check = None):
+def update_current_client(user, date = None, is_month_to_month = None, internet = None, is_optical_fiber = None, is_electronic_check = None):
 
     """
     Updates a user in the dataframe.
@@ -46,7 +46,7 @@ def update_user(user, date = None, is_month_to_month = None, internet = None, is
         user.is_electronic_check = is_electronic_check
 
 
-def delete_last_user(df, list_clients):
+def delete_last_client(df, list_clients):
     """"
     Deletes the last user in the dataframe.
     
