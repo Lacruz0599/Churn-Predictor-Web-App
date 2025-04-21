@@ -106,12 +106,3 @@ def df_predictions( list_clients ):
     )
     
     return main_df
-
-def toggle_load_prediction( load_prediction ):
-    """
-    Function to toggle the load prediction button.
-    """
-    if load_prediction:
-        load_prediction = False
-    else:
-        load_prediction = True
