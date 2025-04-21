@@ -33,4 +33,5 @@ class ApiChurnRepository():
             show_results(list_clients)
 
         except Exception as e:
+            
             show_error(str(e))

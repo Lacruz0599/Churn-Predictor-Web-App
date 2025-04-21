@@ -2,7 +2,7 @@
 import datetime
 
 import pandas as pd
-import streamlit as st
+# import streamlit as st
 
 
 def add_client_df( client, df, clients_list ):
@@ -15,8 +15,8 @@ def add_client_df( client, df, clients_list ):
     - internet: If the user has internet
     - is_optical_fiber: If the user has optical fiber
     """
-    # df.loc[len(df)] = client.to_dict()
-    df.loc[len(df)] = st.session_state.current_client.to_dict()
+    df.loc[len(df)] = client.to_dict()
+    # df.loc[len(df)] = st.session_state.current_client.to_dict()
     df.reset_index(drop=True, inplace=True)
     clients_list.append(client)
 
@@ -106,3 +106,12 @@ def df_predictions( list_clients ):
     )
     
     return main_df
+
+def toggle_load_prediction( load_prediction ):
+    """
+    Function to toggle the load prediction button.
+    """
+    if load_prediction:
+        load_prediction = False
+    else:
+        load_prediction = True
