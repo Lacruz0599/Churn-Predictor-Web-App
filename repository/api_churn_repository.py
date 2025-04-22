@@ -25,7 +25,6 @@ class ApiChurnRepository():
             predictions = self.data_source.predict_churn(body)
 
             # Map the predictions to the clients
-
             for i, client in enumerate(list_clients):
                 client.probability = predictions[i]['probability']
                 client.churn = predictions[i]['prediction']
