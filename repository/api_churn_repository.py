@@ -12,6 +12,7 @@ Dependencies:
     - datasource.api_churn_datasource.ApiChurnDataSource: The data source class used to communicate with the API.
 """
 
+import time
 from datasource.api_churn_datasource import ApiChurnDataSource
 
 
@@ -63,6 +64,7 @@ class ApiChurnRepository:
                 client.probability = predictions[i]['probability']
                 client.churn = predictions[i]['prediction']
             
+            time.sleep(1)  # Prevents excesive calls
             show_results(list_clients)
 
         except Exception as e:

@@ -40,7 +40,7 @@ class ApiChurnDataSource:
             Exception: If the API response status code is not 200.
             Exception: If the 'predictions' key is not found in the API response.
         """
-        response = requests.post(self.url, json=data, timeout=(120, 30))
+        response = requests.post(self.url, json=data, timeout=(120, 180))
 
         if response.status_code != 200:
             raise Exception("Algo salió mal en la predicción de churn")

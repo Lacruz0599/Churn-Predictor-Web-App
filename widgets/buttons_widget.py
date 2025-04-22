@@ -17,20 +17,6 @@ def buttons_widget():
 
         columns = st.columns(4, vertical_alignment='center')
 
-        # if st.session_state.load_prediction:
-        #     with st.spinner('Cargando predicciones...'):
-        #         time.sleep(10)
-        #         columns[0].empty()
-        #         repository.predict_churn(
-        #             st.session_state.clients_list,
-        #             show_results,
-        #             show_error
-        #         )
-        #         toggle_load_prediction()
-        # else:
-        #     columns[0].button('Predecir abandonos', 
-        #                 use_container_width=True,
-        #                 on_click= toggle_load_prediction)
 
         columns[0].button('Predecir abandonos', 
                     use_container_width=True,
@@ -65,6 +51,7 @@ def buttons_widget():
                     show_results,
                     show_error
                     )
+                
             toggle_load_prediction()
         
 
