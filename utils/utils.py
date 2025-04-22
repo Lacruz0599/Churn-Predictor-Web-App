@@ -28,10 +28,10 @@ def update_current_client(user, date=None, is_month_to_month=None, internet=None
     Args:
         user (object): The client object to be updated.
         date (datetime.date, optional): The date to update the client's subscription.
-        is_month_to_month (int, optional): Whether the client is on a month-to-month plan.
-        internet (int, optional): Whether the client has internet service.
-        is_optical_fiber (int, optional): Whether the client has optical fiber internet.
-        is_electronic_check (int, optional): Whether the client pays with an electronic check.
+        is_month_to_month (str, optional): Whether the client is on a month-to-month plan.
+        internet (str, optional): Whether the client has internet service.
+        is_optical_fiber (str, optional): Whether the client has optical fiber internet.
+        is_electronic_check (str, optional): Whether the client pays with an electronic check.
 
     Returns:
         None
