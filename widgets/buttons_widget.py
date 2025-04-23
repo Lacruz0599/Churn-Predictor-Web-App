@@ -2,9 +2,9 @@
 
 import streamlit as st
 
+from entities.client_entity import Client
 from repository.api_churn_repository import ApiChurnRepository
-from utils.utils import add_client_df, delete_last_client
-from widgets.dialog_widgets import show_results, show_error
+from utils.utils import add_client, delete_last_client
 
 
 def buttons_widget():
@@ -28,31 +28,37 @@ def buttons_widget():
                         use_container_width=True,
                         disabled= st.session_state.load_prediction,
                         on_click=delete_last_client,
-                        args=(st.session_state.df_to_predict,
-                                st.session_state.clients_list))
+                        kwargs={'list_clients': st.session_state.clients_list})
         
         
-        columns[3].button('Añadir', 
-                        use_container_width=True,
-                        disabled= st.session_state.load_prediction,
-                        on_click=add_client_df,
-                        args=(st.session_state.current_client, 
-                                st.session_state.df_to_predict,
-                                st.session_state.clients_list))
+        with columns[3]:
+            st.button('Añadir', 
+                use_container_width=True,
+                disabled= st.session_state.load_prediction,
+                on_click=add_client,
+                args=(st.session_state.current_client, 
+                      st.session_state.clients_list))
+            st.session_state.current_client = Client()
         
 
         if not st.session_state.load_prediction:
             return
         
+        
         with columns[1]:
             with st.spinner('Cargando predicciones...'):
-                repository.predict_churn(
-                    st.session_state.clients_list,
-                    show_results,
-                    show_error
-                    )
-                
-            toggle_load_prediction()
+                try:
+                    repository.predict_churn(
+                        st.session_state.clients_list
+                        )        
+                    st.session_state.ready_to_show = True   
+                except Exception as e:
+                    st.session_state.error_occurred = True
+                    st.session_state.error_message = str(e)
+                    
+                finally:
+                    toggle_load_prediction()
+                    st.rerun()
         
 
 

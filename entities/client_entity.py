@@ -61,6 +61,7 @@ class Client:
         self.is_electronic_check = is_electronic_check
         self.probability = probability
         self.churn = churn
+    
 
     def to_dict(self, include_prob_churn=False):
         """
