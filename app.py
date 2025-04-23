@@ -37,8 +37,7 @@ st.set_page_config(
     page_title="Predicción de Churn",
     page_icon=":money_with_wings:",
     menu_items={
-        'Get Help': 'https://www.extremelycoolapp.com/help',
-        'Report a bug': "https://www.extremelycoolapp.com/bug",
+        'Get help': 'mailto:cesareduardocruzcabrera@gmail.com',
         'About': about_app
     }
 )
