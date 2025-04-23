@@ -49,12 +49,14 @@ def buttons_widget():
         columns[0].button('Predecir abandonos', 
                            use_container_width=True,
                            disabled=st.session_state.load_prediction,
+                           help='Predecir cuales clientes abandonarán',
                            on_click=toggle_load_prediction)
 
         # Button to delete the last client
         columns[2].button('Eliminar', 
                            use_container_width=True,
                            disabled=st.session_state.load_prediction,
+                           help='Eliminar el último cliente añadido a la lista',
                            on_click=delete_last_client,
                            kwargs={'list_clients': st.session_state.clients_list})
 
@@ -63,6 +65,7 @@ def buttons_widget():
             st.button('Añadir', 
                       use_container_width=True,
                       disabled=st.session_state.load_prediction,
+                      help= 'Añade un nuevo cliente a la lista',
                       on_click=add_client,
                       args=(st.session_state.current_client, 
                             st.session_state.clients_list))

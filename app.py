@@ -31,7 +31,17 @@ from utils.utils import create_df, update_current_client
 from widgets.buttons_widget import buttons_widget
 from widgets.dialog_widgets import show_error, show_results
 from widgets.form_widget import form_widget
+from docs.docs import about_app
 
+st.set_page_config(
+    page_title="Predicción de Churn",
+    page_icon=":money_with_wings:",
+    menu_items={
+        'Get Help': 'https://www.extremelycoolapp.com/help',
+        'Report a bug': "https://www.extremelycoolapp.com/bug",
+        'About': about_app
+    }
+)
 
 # Initialize session state variables
 if 'first_time' not in st.session_state:

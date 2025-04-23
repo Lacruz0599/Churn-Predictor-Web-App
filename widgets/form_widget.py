@@ -52,6 +52,7 @@ def form_widget():
                 value=datetime.date.today(),
                 min_value=datetime.date(2017, 1, 1),
                 max_value=datetime.date.today(),
+                help='Fecha de ingreso del cliente',
             )
 
             # Dropdown for monthly billing
@@ -61,6 +62,7 @@ def form_widget():
                 options=['Si', 'No', 'No lo sé'],
                 key='is_month_to_month',
                 index=0,
+                help='¿El cliente paga mensualmente su servicio?',
             )
 
             # Dropdown for internet service
@@ -70,6 +72,7 @@ def form_widget():
                 options=['Si', 'No', 'No lo sé'],
                 key='internet',
                 index=0,
+                help='¿El cliente tiene servicio de internet?',
             )
 
         # Second section of the form
@@ -86,6 +89,7 @@ def form_widget():
                 options=['Si', 'No', 'No lo sé'],
                 key='optical_fiber',
                 index=0,
+                help='¿El cliente tiene fibra óptica en su servicio?',
             )
 
             # Dropdown for electronic check payment
@@ -95,6 +99,7 @@ def form_widget():
                 options=['Si', 'No', 'No lo sé'],
                 key='is_electronic_check',
                 index=0,
+                help='¿El cliente paga con cheque electrónico?',
             )
 
     return date, is_month_to_month, internet, is_optical_fiber, is_electronic_check
