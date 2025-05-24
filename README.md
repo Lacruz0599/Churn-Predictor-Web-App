@@ -1,10 +1,19 @@
 # 📊 Churn Predictor Web App
 
-Una aplicación web desarrollada en Streamlit que permite cargar datos de clientes y obtener predicciones sobre el riesgo de abandono (churn), consumiendo un modelo de machine learning a través de una API creada con FastAPI.
+Esta aplicación web, desarrollada con **Streamlit**, permite a los usuarios cargar datos de clientes y obtener predicciones personalizadas sobre el riesgo de abandono (churn). La app se conecta a una **API creada con FastAPI**, que expone un modelo de machine learning previamente entrenado para ofrecer respuestas rápidas y precisas.
+
+Ofrece una interfaz interactiva y amigable para facilitar el análisis visual de los datos, así como la interpretación de las predicciones generadas por el modelo.
 
 ## 🎯 Objetivo
 
-Esta herramienta tiene como propósito facilitar la toma de decisiones en empresas que buscan reducir la pérdida de clientes. Permite visualizar de forma clara los datos ingresados, predecir el churn de forma automática y mostrar probabilidades asociadas a cada predicción.
+El objetivo principal de esta herramienta es apoyar a las empresas en sus estrategias de **retención de clientes**, proporcionando una solución práctica y accesible para identificar clientes en riesgo de churn. 
+
+La aplicación permite:
+- **Visualizar los datos** de forma clara y ordenada.
+- **Realizar predicciones automáticas**, mostrando la probabilidad de abandono para cada cliente.
+- **Interpretar resultados** de forma intuitiva para apoyar la toma de decisiones basada en datos.
+
+Está pensada para equipos de negocio, marketing o analítica que buscan integrar modelos predictivos sin necesidad de conocimientos técnicos avanzados.
 
 ## 🌐 Tecnologías utilizadas
 
